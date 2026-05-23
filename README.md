@@ -9,13 +9,23 @@ sober palette, shared-border grids, 4px-blue header, single dark CTA band).
 
 > Prototype only — not an official service. No data is collected or transmitted.
 
-## Pages
+## Languages
 
-- **Home** — hero + SPV portal panel, search, online services, stats, news, CTA
-- **/services** — Virtual Private Space (SPV), RO e-Factura, RO e-Transport, SAF-T, payments, "ANA" assistant
-- **/forms** — fiscal declarations by number (212, 300, 100/101, 406, …)
-- **/contact** — virtual assistant, Call Center, email, regional offices
-- **/about** — mission, what we do, values
+Bilingual via locale routing under `/[lang]` (`ro`, `en`). **Romanian is the
+default** — `/` redirects to `/ro`. The RO/EN buttons in the government banner
+switch between the equivalent page in the other language. All copy lives in
+typed dictionaries (`lib/dictionaries.ts`); RO uses familiar ANAF terminology
+(*Spațiul Privat Virtual*, *Declarația unică*, *Decont de TVA*, *Fișierul
+standard de control fiscal*). To make English the default, change
+`defaultLocale` in `lib/i18n.ts`.
+
+## Pages (per language)
+
+- **`/{lang}`** — hero + SPV portal panel, search, online services, stats, news, CTA
+- **`/{lang}/services`** — SPV, RO e-Factura, RO e-Transport, SAF-T, payments, "ANA" assistant
+- **`/{lang}/forms`** — fiscal declarations by number (212, 300, 100/101, 406, …)
+- **`/{lang}/contact`** — virtual assistant, Call Center, email, regional offices
+- **`/{lang}/about`** — mission, what we do, values
 
 ## Develop
 
