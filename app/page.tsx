@@ -87,8 +87,9 @@ export default function Home() {
             <span className="notice__title">Demonstration prototype</span>
             <br />
             <span className="notice__text">
-              This is an English-language design prototype of the ANAF website. It is not an official
-              service and no data is collected or transmitted.
+              This website is not an official government service. It was built to showcase how AI
+              coding agents can rapidly prototype modern public services. The official Romanian
+              tax administration is at <a href="https://www.anaf.ro" target="_blank" rel="noopener noreferrer">anaf.ro</a>.
             </span>
           </span>
         </div>
