@@ -79,22 +79,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DEMO NOTICE */}
-      <div className="container" style={{ marginTop: 'var(--sp8)' }}>
-        <div className="notice notice--warn">
-          <Icon name="info" size={20} />
-          <span>
-            <span className="notice__title">Demonstration prototype</span>
-            <br />
-            <span className="notice__text">
-              This website is not an official government service. It was built to showcase how AI
-              coding agents can rapidly prototype modern public services. The official Romanian
-              tax administration is at <a href="https://www.anaf.ro" target="_blank" rel="noopener noreferrer">anaf.ro</a>.
-            </span>
-          </span>
-        </div>
-      </div>
-
       {/* SERVICES */}
       <section className="section">
         <div className="container">
