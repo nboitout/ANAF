@@ -1,13 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import GovBanner from '@/components/GovBanner';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import PrototypeBanner from '@/components/PrototypeBanner';
+import { defaultLocale } from '@/lib/i18n';
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-inter',
   display: 'swap',
@@ -21,26 +18,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'ANAF — National Agency for Fiscal Administration',
-    template: '%s · ANAF',
-  },
-  description:
-    'Official services of the Romanian tax administration: Virtual Private Space (SPV), e-Invoice, e-Transport, SAF-T, online payments, forms and taxpayer assistance.',
+  title: 'ANAF',
   metadataBase: new URL('https://example.org'),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body>
-        <a href="#main" className="sr-only">Skip to main content</a>
-        <GovBanner />
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <PrototypeBanner />
-      </body>
+    <html lang={defaultLocale} className={`${inter.variable} ${jetbrains.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

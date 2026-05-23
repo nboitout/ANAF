@@ -1,16 +1,15 @@
 import Icon from './Icon';
+import type { Dictionary } from '@/lib/dictionaries';
 
-export default function PrototypeBanner() {
+export default function PrototypeBanner({ dict }: { dict: Dictionary }) {
   return (
-    <aside className="proto-banner" role="note" aria-label="Prototype notice">
+    <aside className="proto-banner" role="note" aria-label={dict.protoBanner.title}>
       <Icon name="info" size={18} strokeWidth={2} />
       <span>
-        <span className="proto-banner__title">Demonstration prototype</span>
+        <span className="proto-banner__title">{dict.protoBanner.title}</span>
         <span className="proto-banner__text">
-          This website is not an official government service. It was built to showcase how AI
-          coding agents can rapidly prototype modern public services. The official Romanian
-          tax administration is at{' '}
-          <a href="https://www.anaf.ro" target="_blank" rel="noopener noreferrer">anaf.ro</a>.
+          {dict.protoBanner.text}{' '}
+          <a href="https://www.anaf.ro" target="_blank" rel="noopener noreferrer">{dict.protoBanner.link}</a>.
         </span>
       </span>
     </aside>

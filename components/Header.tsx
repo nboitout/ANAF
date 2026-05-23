@@ -4,54 +4,53 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Icon from './Icon';
-import { NAV, SITE } from '@/lib/site';
+import { SITE } from '@/lib/site';
+import type { Locale } from '@/lib/i18n';
+import type { Dictionary } from '@/lib/dictionaries';
 
-function isActive(pathname: string, href: string) {
-  if (href === '/') return pathname === '/';
-  return pathname.startsWith(href);
-}
-
-export default function Header() {
-  const pathname = usePathname();
+export default function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+  const pathname = usePathname() || `/${lang}`;
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const p = (href: string) => `/${lang}${href}`;
+  const isActive = (href: string) => pathname.startsWith(p(href));
 
   return (
     <header className="header">
       <div className="container header__inner">
-        <Link href="/" className="brand" aria-label={`${SITE.fullName} — home`}>
-          <span className="brand__mark" aria-hidden="true">AN</span>
+        <Link href={`/${lang}`} className="brand" aria-label={`${dict.brand.full} — ${dict.common.home}`}>
+          <span className="brand__mark" aria-hidden="true">{SITE.mark}</span>
           <span>
             <span className="brand__name">{SITE.acronym}</span>
             <br />
-            <span className="brand__full">{SITE.fullName}</span>
+            <span className="brand__full">{dict.brand.full}</span>
           </span>
         </Link>
 
         <nav className="nav" aria-label="Main">
-          {NAV.map((item) => (
+          {dict.nav.map((item) => (
             <div
-              key={item.label}
+              key={item.href}
               className="nav__item"
-              data-open={openMenu === item.label}
-              onMouseEnter={() => item.items && setOpenMenu(item.label)}
+              data-open={openMenu === item.href}
+              onMouseEnter={() => item.items.length > 0 && setOpenMenu(item.href)}
               onMouseLeave={() => setOpenMenu(null)}
             >
               <Link
-                href={item.href}
+                href={p(item.href)}
                 className="nav__link"
-                aria-current={isActive(pathname, item.href) ? 'page' : undefined}
-                aria-haspopup={item.items ? 'true' : undefined}
-                aria-expanded={item.items ? openMenu === item.label : undefined}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                aria-haspopup={item.items.length > 0 ? 'true' : undefined}
+                aria-expanded={item.items.length > 0 ? openMenu === item.href : undefined}
                 onClick={() => setOpenMenu(null)}
               >
                 {item.label}
-                {item.items && <Icon name="chevron" size={14} className="icon chev" strokeWidth={2} />}
+                {item.items.length > 0 && <Icon name="chevron" size={14} className="icon chev" strokeWidth={2} />}
               </Link>
-              {item.items && (
+              {item.items.length > 0 && (
                 <div className="dropdown" role="menu">
                   {item.items.map((d) => (
-                    <Link key={d.label} href={d.href} className="dropdown__item" role="menuitem" onClick={() => setOpenMenu(null)}>
+                    <Link key={d.label} href={p(d.href)} className="dropdown__item" role="menuitem" onClick={() => setOpenMenu(null)}>
                       <Icon name={d.icon} size={20} />
                       <span>
                         <span className="dropdown__label">{d.label}</span>
@@ -67,14 +66,14 @@ export default function Header() {
         </nav>
 
         <div className="header__cta">
-          <Link href="/services" className="btn btn--primary btn--sm btn--login">
+          <Link href={p('/services')} className="btn btn--primary btn--sm btn--login">
             <Icon name="login" size={16} />
-            Log in (SPV)
+            {dict.brand.login}
           </Link>
           <button
             type="button"
             className="nav-toggle"
-            aria-label="Open menu"
+            aria-label="Menu"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
           >
@@ -85,20 +84,20 @@ export default function Header() {
 
       <div className="mobile-nav" data-open={mobileOpen}>
         <ul className="mobile-nav__list">
-          {NAV.map((item) => (
-            <li key={item.label}>
-              <Link href={item.href} className="mobile-nav__link" onClick={() => setMobileOpen(false)}>
+          {dict.nav.map((item) => (
+            <li key={item.href}>
+              <Link href={p(item.href)} className="mobile-nav__link" onClick={() => setMobileOpen(false)}>
                 {item.label}
               </Link>
             </li>
           ))}
         </ul>
         <div className="mobile-nav__cta">
-          <Link href="/services" className="btn btn--primary btn--sm" onClick={() => setMobileOpen(false)}>
-            <Icon name="login" size={16} /> Log in (SPV)
+          <Link href={p('/services')} className="btn btn--primary btn--sm" onClick={() => setMobileOpen(false)}>
+            <Icon name="login" size={16} /> {dict.brand.login}
           </Link>
           <a href={`tel:${SITE.callCenter.replace(/\s/g, '')}`} className="btn btn--ghost btn--sm">
-            <Icon name="phone" size={16} /> Call Center
+            <Icon name="phone" size={16} /> {dict.brand.callCenter}
           </a>
         </div>
       </div>
