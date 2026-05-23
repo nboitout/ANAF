@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Icon from '@/components/Icon';
 import SearchBar from '@/components/SearchBar';
 import NewsBlock from '@/components/NewsBlock';
+import ProtoStrip from '@/components/ProtoStrip';
 import { SITE } from '@/lib/site';
 
 const SERVICES = [
@@ -31,6 +32,8 @@ const QUICK_TILES = [
 export default function Home() {
   return (
     <>
+      <ProtoStrip />
+
       {/* HERO */}
       <section className="hero">
         <div className="container hero__grid">

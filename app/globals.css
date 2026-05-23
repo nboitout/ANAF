@@ -255,6 +255,16 @@ button{font:inherit;cursor:pointer}
 .notice--err{border-left-color:var(--red);background:var(--red-tint)}
 .notice--err .icon{color:var(--red)}
 
+/* Full-width prototype strip — placed before the hero */
+.proto-strip{background:var(--orange-tint);border-bottom:1px solid rgba(179,64,0,.18)}
+.proto-strip__inner{display:flex;gap:var(--sp2);align-items:center;justify-content:center;
+  padding:var(--sp3) 0;font-size:.8125rem;line-height:1.5;color:var(--orange);text-align:center}
+.proto-strip .icon{color:var(--orange);flex:none}
+.proto-strip strong{font-weight:700}
+.proto-strip a{color:var(--orange);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.proto-strip a:hover{color:#7a2c00}
+@media (max-width:768px){.proto-strip__inner{text-align:left;align-items:flex-start}}
+
 /* Persistent prototype banner — pinned bottom-left, stays while scrolling */
 .proto-banner{position:fixed;left:var(--sp5);bottom:var(--sp5);z-index:90;max-width:360px;
   display:flex;gap:var(--sp3);align-items:flex-start;padding:var(--sp4);background:var(--white);
